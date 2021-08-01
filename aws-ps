@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DIR=`dirname "$0"`
+aws-profile-switcher-go
+
+profile="$(cat ~/.aws-ps)"
+
+if [ $profile = "default" ];
+then
+  unset AWS_PROFILE
+else
+  export AWS_PROFILE="$profile"
+fi

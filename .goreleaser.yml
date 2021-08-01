@@ -1,0 +1,35 @@
+project_name: aws-profile-switcher-go
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - main: .
+    binary: aws-profile-switcher-go
+    goos:
+      - linux
+      - darwin
+      - windows
+archives:
+  - replacements:
+      darwin: darwin
+      linux: linux
+      amd64: x86_64
+    files:
+      - LICENSE
+      - CREDITS
+      - aws-ps
+release:
+  prerelease: auto
+brews:
+  - tap:
+      owner: ryu022304
+      name: homebrew-aws-ps
+    folder: Formula
+    homepage: 'https://github.com/ryu022304/aws-profile-switcher-go'
+    description: 'You can easily switch AWS CLI profile settings.'
+    license: "MIT"
+    install: |
+      bin.install "aws-ps"
+      bin.install "aws-profile-switcher-go"
